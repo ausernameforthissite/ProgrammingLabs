@@ -35,6 +35,8 @@ public class MainWindow {
     }
 
     public void pressNewList() {
+        resetList();
+        refreshListView();
     }
 
     public void pressOpenList() {

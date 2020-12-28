@@ -15,4 +15,8 @@ public class ListContainer {
         return list;
     }
 
+    public static void resetList() {
+        list = new MyLinkedList<>();
+    }
+
 }
