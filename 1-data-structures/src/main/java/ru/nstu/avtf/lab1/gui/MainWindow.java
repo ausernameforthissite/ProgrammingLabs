@@ -1,11 +1,17 @@
 package ru.nstu.avtf.lab1.gui;
 
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
+
 import ru.nstu.avtf.lab1.gui.alerts.InformationAlert;
+
+import java.util.stream.Collectors;
+
+import static ru.nstu.avtf.lab1.gui.ListContainer.LIST;
 
 public class MainWindow {
     public MenuItem newListMenuItem = new MenuItem();
@@ -20,6 +26,10 @@ public class MainWindow {
     public Button sortMenuItem = new Button();
 
     public ListView<Integer> listView = new ListView<>();
+
+    public MainWindow() {
+        refreshListView();
+    }
 
     public void pressNewList() {
     }
@@ -46,11 +56,20 @@ public class MainWindow {
     }
 
     public void pressAdd() {
+        LIST.add(111);
+        refreshListView();
     }
 
     public void pressRemove() {
     }
 
     public void pressSort() {
+    }
+
+    private void refreshListView() {
+
+        ObservableList<Integer> observableList = FXCollections.observableList(
+                LIST.stream().collect(Collectors.toList()));
+        listView.setItems(observableList);
     }
 }
