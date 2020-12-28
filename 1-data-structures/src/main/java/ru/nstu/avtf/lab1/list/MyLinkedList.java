@@ -35,6 +35,8 @@ public class MyLinkedList<T extends Comparable<T>> implements Iterable<T> {
         // если список пуст, создадим первый элемент
         if (head == null) {
             head = new Node<>(data);
+            size++;
+            return;
         }
 
         // создадим новый элемент
@@ -87,6 +89,22 @@ public class MyLinkedList<T extends Comparable<T>> implements Iterable<T> {
     }
 
     /**
+     * Получить элемент списка по индексу
+     *
+     * @param index индеус
+     * @return элемент с искомым индексом, если он существует, иначе {@code null}
+     */
+    public Node<T> getNode(int index) {
+        Node<T> current = head;
+        int counter = 0;
+        while (counter < index && current != null) {
+            current = current.getNext();
+            counter++;
+        }
+        return current;
+    }
+
+    /**
      * Получить данные элемента списка по индексу
      *
      * @param index индекс
@@ -100,17 +118,12 @@ public class MyLinkedList<T extends Comparable<T>> implements Iterable<T> {
         }
 
         // пробежимся по списку, считая индексы элементов
-        Node<T> current = head.getNext();
-        for (int i = 0; i < index; i++) {
-            // если уже конец списка, но нужного индекса нет, значит, ничего не нашли
-            if (current.getNext() == null) {
-                return null;
-            }
-
-            current = current.getNext();
+        Node<T> current = getNode(index);
+        if (current == null) {
+            return null;
+        } else {
+            return current.getData();
         }
-
-        return current.getData();
     }
 
     /**
@@ -118,29 +131,20 @@ public class MyLinkedList<T extends Comparable<T>> implements Iterable<T> {
      *
      * @param index индекс
      */
-    public void remove(int index) {
+    public boolean remove(int index) {
         // если индекс неверный, либо список пуст, удаление не работает
         if (index < 0 || index >= size || head == null) {
-            return;
+            return false;
         }
-
-        // пробежимся по списку, считая индексы элементов
-        // N.B. Храним ссылки на один элемент раньше по сравнению с get(),
-        // чтобы соединить «предыдущий» элемент со «следующим»
-        Node<T> current = head;
-        for (int i = 0; i < index; i++) {
-            // если уже конец списка, но нужного индекса нет, значит, ничего не нашли
-            if (current.getNext() == null) {
-                return;
-            }
-            current = current.getNext();
+        if (index == 0) {
+            head = head.getNext();
+        } else {
+            Node<T> previous = getNode(index - 1);
+            Node<T> element = previous.getNext();
+            previous.setNext(element.getNext());
         }
-
-        // соединим элементы списка в обход удаляемого
-        current.setNext(current.getNext().getNext());
-
-        // уменьшим размер
         size--;
+        return true;
     }
 
     /**
