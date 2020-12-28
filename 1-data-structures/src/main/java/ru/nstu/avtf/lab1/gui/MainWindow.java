@@ -5,13 +5,15 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import ru.nstu.avtf.lab1.gui.alerts.InformationAlert;
 
 import java.util.stream.Collectors;
 
-import static ru.nstu.avtf.lab1.gui.ListContainer.LIST;
+import static ru.nstu.avtf.lab1.gui.ListContainer.*;
+import static ru.nstu.avtf.lab1.gui.StageLoader.loadAddDialog;
 
 public class MainWindow {
     public MenuItem newListMenuItem = new MenuItem();
@@ -28,6 +30,10 @@ public class MainWindow {
     public ListView<Integer> listView = new ListView<>();
 
     public MainWindow() {
+        setListView(listView);
+        System.out.println("MAIN:");
+        System.out.println(listView);
+        System.out.println(getList());
         refreshListView();
     }
 
@@ -56,7 +62,7 @@ public class MainWindow {
     }
 
     public void pressAdd() {
-        LIST.add(111);
+        showDialog(loadAddDialog());
         refreshListView();
     }
 
@@ -66,10 +72,12 @@ public class MainWindow {
     public void pressSort() {
     }
 
-    private void refreshListView() {
-
-        ObservableList<Integer> observableList = FXCollections.observableList(
-                LIST.stream().collect(Collectors.toList()));
-        listView.setItems(observableList);
+    /**
+     * Показать {@link Stage} в виде диалогового окна
+     */
+    private static void showDialog(Stage stage) {
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.centerOnScreen();
+        stage.showAndWait();
     }
 }
