@@ -1,22 +1,24 @@
 package ru.nstu.avtf.lab1.gui;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import ru.nstu.avtf.lab1.gui.alerts.ExceptionAlert;
 import ru.nstu.avtf.lab1.gui.alerts.InformationAlert;
 
-import java.util.stream.Collectors;
+import java.io.File;
+import java.io.IOException;
 
 import static ru.nstu.avtf.lab1.gui.ListContainer.*;
 import static ru.nstu.avtf.lab1.gui.StageLoader.*;
 
 public class MainWindow {
+    private static final FileChooser CHOOSER = new FileChooser();
+
     public MenuItem newListMenuItem = new MenuItem();
     public MenuItem openListMenuItem = new MenuItem();
     public MenuItem saveListMenuItem = new MenuItem();
@@ -40,6 +42,8 @@ public class MainWindow {
     }
 
     public void pressOpenList() {
+        openList();
+        refreshListView();
     }
 
     public void pressSaveList() {
@@ -98,5 +102,22 @@ public class MainWindow {
         }
         textArea.clear();
         textArea.setText(result.toString());
+    }
+
+    private void openList() {
+        CHOOSER.setTitle("Открыть список...");
+        File file = CHOOSER.showOpenDialog(textArea.getScene().getWindow());
+        if (file == null) {
+            return;
+        }
+        try {
+            readFromFile(file);
+        } catch (IOException | NumberFormatException e) {
+            new ExceptionAlert(
+                    "Ошибка",
+                    "Не удалось прочитать файл",
+                    "Неправильный формат файла",
+                    e).showAndWait();
+        }
     }
 }
