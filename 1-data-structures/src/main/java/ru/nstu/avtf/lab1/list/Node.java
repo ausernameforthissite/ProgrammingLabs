@@ -1,4 +1,4 @@
-package ru.nstu.avtf.lab1;
+package ru.nstu.avtf.lab1.list;
 
 /**
  * Элемент односвязного списка

@@ -1,5 +1,7 @@
 package ru.nstu.avtf.lab1;
 
+import ru.nstu.avtf.lab1.list.MyLinkedList;
+
 import java.util.Random;
 
 public class ListTest {
