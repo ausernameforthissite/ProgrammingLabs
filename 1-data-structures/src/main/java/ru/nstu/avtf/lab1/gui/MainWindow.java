@@ -16,6 +16,9 @@ import java.io.IOException;
 import static ru.nstu.avtf.lab1.gui.ListContainer.*;
 import static ru.nstu.avtf.lab1.gui.StageLoader.*;
 
+/**
+ * Контроллер главного окна приложения
+ */
 public class MainWindow {
     private static final FileChooser CHOOSER = new FileChooser();
 
@@ -32,28 +35,39 @@ public class MainWindow {
 
     public TextArea textArea = new TextArea();
 
-    public MainWindow() {
-        refreshListView();
-    }
-
+    /**
+     * Очистить список
+     */
     public void pressNewList() {
         resetList();
         refreshListView();
     }
 
+    /**
+     * Показать диалог открытия
+     */
     public void pressOpenList() {
         openList();
         refreshListView();
     }
 
+    /**
+     * Показать диалог сохранения
+     */
     public void pressSaveList() {
         saveList();
     }
 
+    /**
+     * Выйти из приложения
+     */
     public void pressClose() {
         ((Stage) textArea.getScene().getWindow()).close();
     }
 
+    /**
+     * Показать информацию о программе
+     */
     public void pressAbout() {
         new InformationAlert(
                 "О программе",
@@ -62,21 +76,33 @@ public class MainWindow {
                 ).showAndWait();
     }
 
+    /**
+     * Показать диалог добавления элемента в конец списка
+     */
     public void pressAddToEnd() {
         showDialog(loadAddToEndDialog());
         refreshListView();
     }
 
+    /**
+     * Показать диалог добавления элемента под заданным индексом
+     */
     public void pressAdd() {
         showDialog(loadAddDialog());
         refreshListView();
     }
 
+    /**
+     * Показать диалог удаления элемента под заданным индексом
+     */
     public void pressRemove() {
         showDialog(loadRemoveDialog());
         refreshListView();
     }
 
+    /**
+     * Отсортировать список
+     */
     public void pressSort() {
         getList().sort();
         refreshListView();
@@ -98,13 +124,16 @@ public class MainWindow {
         StringBuilder result = new StringBuilder();
         int index = 0;
         for (int i : getList()) {
-            result.append(String.format("[\t%d] %d\n", index, i));
+            result.append(String.format("[%d]\t%d\n", index, i));
             index++;
         }
         textArea.clear();
         textArea.setText(result.toString());
     }
 
+    /**
+     * Показать диалог открытия файла и обработать результат
+     */
     private void openList() {
         CHOOSER.setTitle("Открыть список...");
         File file = CHOOSER.showOpenDialog(textArea.getScene().getWindow());
@@ -122,6 +151,9 @@ public class MainWindow {
         }
     }
 
+    /**
+     * Показать диалог сохранения файла и обработать результат
+     */
     private void saveList() {
         CHOOSER.setTitle("Сохранить список...");
         File file = CHOOSER.showSaveDialog(textArea.getScene().getWindow());

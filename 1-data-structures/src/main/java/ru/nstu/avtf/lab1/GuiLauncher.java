@@ -11,7 +11,7 @@ public class GuiLauncher extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         StageLoader.loadMainWindow().show();
     }
 }

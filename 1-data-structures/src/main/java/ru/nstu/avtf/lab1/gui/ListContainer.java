@@ -17,14 +17,28 @@ public class ListContainer {
     private ListContainer() {
     }
 
+    /**
+     * Обратиться к единственному связному списку в приложении
+     *
+     * @return связный список
+     */
     public static MyLinkedList<Integer> getList() {
         return list;
     }
 
+    /**
+     * Очистить связный список
+     */
     public static void resetList() {
         list = new MyLinkedList<>();
     }
 
+    /**
+     * Построчно прочитать числа из файла и добавить в список
+     *
+     * @param file файл
+     * @throws IOException ошибки чтения
+     */
     public static void readFromFile(File file) throws IOException {
         try (Stream<String> stream = Files.lines(file.toPath())) {
             resetList();
@@ -32,6 +46,12 @@ public class ListContainer {
         }
     }
 
+    /**
+     * Построчно записать числа из списка в файл
+     *
+     * @param file файл
+     * @throws IOException ошибки записи
+     */
     public static void saveToFile(File file) throws IOException {
         try (BufferedWriter writer = Files.newBufferedWriter(file.toPath())) {
             for (Integer integer : list) {

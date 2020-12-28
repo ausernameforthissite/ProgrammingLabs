@@ -8,12 +8,18 @@ import ru.nstu.avtf.lab1.gui.alerts.UnknownExceptionAlert;
 
 import static ru.nstu.avtf.lab1.gui.ListContainer.*;
 
+/**
+ * Диалог добавления элемента под заданным индексом
+ */
 public class AddDialog {
     public TextField indexTextField = new TextField();
     public TextField dataTextField = new TextField();
     public Button okButton = new Button();
     public Button cancelButton = new Button();
 
+    /**
+     * Обработать нажатие кнопки "OK"
+     */
     public void pressOk() {
         try {
             int data = Integer.parseInt(dataTextField.getText());
@@ -29,10 +35,16 @@ public class AddDialog {
         }
     }
 
+    /**
+     * Обработать нажатие кнопки "Отмена"
+     */
     public void pressCancel() {
         close();
     }
 
+    /**
+     * Закрыть диалог
+     */
     private void close() {
         ((Stage) indexTextField.getScene().getWindow()).close();
     }

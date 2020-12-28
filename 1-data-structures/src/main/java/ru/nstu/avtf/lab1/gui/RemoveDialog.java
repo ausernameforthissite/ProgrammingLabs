@@ -9,11 +9,17 @@ import ru.nstu.avtf.lab1.gui.alerts.WarningAlert;
 
 import static ru.nstu.avtf.lab1.gui.ListContainer.getList;
 
+/**
+ * Диалог удаления элемента под заданным индексом
+ */
 public class RemoveDialog {
     public TextField indexTextField = new TextField();
     public Button okButton = new Button();
     public Button cancelButton = new Button();
 
+    /**
+     * Обработать нажатие кнопки "OK"
+     */
     public void pressOk() {
         try {
             int index = Integer.parseInt(indexTextField.getText());
@@ -33,10 +39,16 @@ public class RemoveDialog {
         }
     }
 
+    /**
+     * Обработать нажатие кнопки "Отмена"
+     */
     public void pressCancel() {
         close();
     }
 
+    /**
+     * Закрыть диалог
+     */
     private void close() {
         ((Stage) indexTextField.getScene().getWindow()).close();
     }

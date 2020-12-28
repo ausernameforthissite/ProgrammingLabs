@@ -19,6 +19,12 @@ public class StageLoader {
     private StageLoader() {
     }
 
+    /**
+     * Прочитать FXML из каталога с ресурсами и создать окно JavaFX
+     *
+     * @param path путь к FXML-файлу
+     * @return окно
+     */
     private static Stage load(String path) {
         FXMLLoader loader = new javafx.fxml.FXMLLoader(StageLoader.class.getResource(path));
 
