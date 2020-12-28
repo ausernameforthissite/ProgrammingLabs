@@ -6,4 +6,4 @@ plugins {
 group 'ru.nstu.avtf.thread'
 version '1.0.0'
 
-mainClassName = 'ru.nstu.avtf.thread.Client'
+mainClassName = 'ru.nstu.avtf.thread.Comparison'

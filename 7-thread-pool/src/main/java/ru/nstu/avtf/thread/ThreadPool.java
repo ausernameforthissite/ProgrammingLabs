@@ -9,13 +9,14 @@ public class ThreadPool {
     private final LinkedBlockingQueue<Runnable> queue;
 
     private boolean shutdown;
+    private final PoolWorker[] threads;
 
     /**
      * @param nThreads число потоков в пуле
      */
     public ThreadPool(int nThreads) {
         queue = new LinkedBlockingQueue<>();
-        PoolWorker[] threads = new PoolWorker[nThreads];
+        threads = new PoolWorker[nThreads];
 
         shutdown = false;
 
@@ -42,6 +43,9 @@ public class ThreadPool {
      */
     public void shutdown() {
         shutdown = true;
+        for (Thread thread : threads) {
+            thread.interrupt();
+        }
     }
 
     /**
@@ -59,7 +63,7 @@ public class ThreadPool {
                         try {
                             queue.wait();
                         } catch (InterruptedException e) {
-                            System.out.println("InterruptedException: " + e.getMessage());
+                            return;
                         }
                     }
                     task = queue.poll();

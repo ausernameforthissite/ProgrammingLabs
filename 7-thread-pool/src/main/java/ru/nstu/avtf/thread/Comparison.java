@@ -23,8 +23,10 @@ public class Comparison {
     private static final int THREADS = 5;
 
     public static void main(String[] args) throws InterruptedException {
-        System.out.println("Тредпул:");
-        System.out.print("П\\Р");
+        System.out.println("П -- потоки, З -- задачи, Р -- размер матрицы:");
+
+        System.out.println("Тредпул (" + THREADS + " потоков):");
+        System.out.print("З\\Р");
         for (int size : SIZES) {
             System.out.print("\t" + size);
         }

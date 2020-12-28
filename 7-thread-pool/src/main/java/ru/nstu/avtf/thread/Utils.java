@@ -5,7 +5,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Utils {
 
+    /**
+     * Нижняя граница диапазона псевдослучайных чисел
+     */
     private static final int MIN_NUMBER = 11;
+    /**
+     * Верхняя граница диапазона псевдослучайных чисел
+     */
     private static final int MAX_NUMBER = 99;
 
     /**
