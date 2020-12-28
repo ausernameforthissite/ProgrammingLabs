@@ -14,8 +14,7 @@ import ru.nstu.avtf.lab1.gui.alerts.InformationAlert;
 import java.util.stream.Collectors;
 
 import static ru.nstu.avtf.lab1.gui.ListContainer.*;
-import static ru.nstu.avtf.lab1.gui.StageLoader.loadAddDialog;
-import static ru.nstu.avtf.lab1.gui.StageLoader.loadAddToEndDialog;
+import static ru.nstu.avtf.lab1.gui.StageLoader.*;
 
 public class MainWindow {
     public MenuItem newListMenuItem = new MenuItem();
@@ -67,6 +66,8 @@ public class MainWindow {
     }
 
     public void pressRemove() {
+        showDialog(loadRemoveDialog());
+        refreshListView();
     }
 
     public void pressSort() {
