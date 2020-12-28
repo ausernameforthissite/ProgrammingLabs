@@ -4,19 +4,23 @@ import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * Класс, который непосредственно обраащется к пулу
+ */
 public class Client {
 
     private static CountDownLatch latch;
 
-    public static void main(String[] args) throws InterruptedException {
-        long time = testThreadPool(100, 100, 5, 15);
-        System.out.println("time:" + time + "ms");
-        time = testManyThreads(100, 100, 5);
-        System.out.println("time:" + time + "ms");
-        time = testOneThread(100, 100);
-        System.out.println("time:" + time + "ms");
-    }
-
+    /**
+     * Протестировать программу с фиксированным пулом потоков
+     *
+     * @param rows      столбцы матрицы
+     * @param columns   строки матрицы
+     * @param threads   число потоков в пуле
+     * @param runnables число задач, которые будут добавлены в пул
+     * @return время выполнения в миллисекундах
+     * @throws InterruptedException прерывание потока
+     */
     public static long testThreadPool(int rows, int columns, int threads, int runnables) throws InterruptedException {
         // распределим работу между задачами
         CopyOnWriteArrayList<CopyOnWriteArrayList<Integer>> matrix = Utils.getRandomMatrix(rows, columns);
@@ -52,6 +56,15 @@ public class Client {
         return endTime - startTime;
     }
 
+    /**
+     * Протестировать программу с произвольным созданием потоков
+     *
+     * @param rows    столбцы матрицы
+     * @param columns строки матрицы
+     * @param threads потоки, между которыми будет распределена матрицы
+     * @return время выполнения в миллисекундах
+     * @throws InterruptedException прерывание потока
+     */
     public static long testManyThreads(int rows, int columns, int threads) throws InterruptedException {
         // распределим работу между задачами
         CopyOnWriteArrayList<CopyOnWriteArrayList<Integer>> matrix = Utils.getRandomMatrix(rows, columns);
@@ -75,7 +88,7 @@ public class Client {
 
         // посчитаем законченные задания, чтобы завершить работу пула
         latch = new CountDownLatch(actualThreads);
-        for (SquaringTask task: tasks) {
+        for (SquaringTask task : tasks) {
             new Thread(task).start();
         }
         // ждём завершения всех заданий, чтобы выключить пул
@@ -84,6 +97,14 @@ public class Client {
         return endTime - startTime;
     }
 
+    /**
+     * Протестировать программу с одним потоком
+     *
+     * @param rows    столбцы матрицы
+     * @param columns строки матрицы
+     * @return время выполнения в миллисекундах
+     * @throws InterruptedException прерывание потока
+     */
     public static long testOneThread(int rows, int columns) throws InterruptedException {
         CopyOnWriteArrayList<CopyOnWriteArrayList<Integer>> matrix = Utils.getRandomMatrix(rows, columns);
 
@@ -96,6 +117,9 @@ public class Client {
         return endTime - startTime;
     }
 
+    /**
+     * Задача по возведению чисел из матрицы в квадрат
+     */
     public static class SquaringTask implements Runnable {
 
         private final CopyOnWriteArrayList<CopyOnWriteArrayList<Integer>> matrix;
@@ -113,6 +137,7 @@ public class Client {
 
         @Override
         public void run() {
+            // сохраняем часть матрицы после возведения в квадрат у себя
             CopyOnWriteArrayList<CopyOnWriteArrayList<Integer>> tmp = new CopyOnWriteArrayList<>();
             for (int i = firstRow; i <= lastRow; i++) {
                 CopyOnWriteArrayList<Integer> row = new CopyOnWriteArrayList<>();
@@ -122,9 +147,13 @@ public class Client {
                 }
                 tmp.add(row);
             }
+
+            // копируем часть матрицы в общую матрицу
             for (int i = firstRow; i <= lastRow; i++) {
                 matrix.set(i, tmp.get(i - firstRow));
             }
+
+            // сообщаем основному потоку, что работа завершена
             if (latch != null) {
                 latch.countDown();
             }
