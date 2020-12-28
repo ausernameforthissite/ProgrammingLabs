@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.Scene?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.layout.BorderPane?>
-
-<Scene xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nstu.avtf.lab1.gui.MainWindow">
+<Scene xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
+       fx:controller="ru.nstu.avtf.lab1.gui.MainWindow">
     <root>
-        <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="220.0" minWidth="220.0" prefHeight="480.0" prefWidth="800.0">
+        <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="220.0" minWidth="220.0" prefHeight="480.0"
+                    prefWidth="800.0">
             <top>
                 <MenuBar BorderPane.alignment="CENTER">
                     <menus>
                         <Menu mnemonicParsing="false" text="Файл">
                             <items>
-                                <MenuItem fx:id="newListMenuItem" mnemonicParsing="false" onAction="#pressNewList" text="Новый список" />
-                                <MenuItem fx:id="openListMenuItem" mnemonicParsing="false" onAction="#pressOpenList" text="Открыть список..." />
-                                <MenuItem fx:id="saveListMenuItem" mnemonicParsing="false" onAction="#pressSaveList" text="Сохранить список..." />
+                                <MenuItem fx:id="newListMenuItem" mnemonicParsing="false" onAction="#pressNewList"
+                                          text="Новый список"/>
+                                <MenuItem fx:id="openListMenuItem" mnemonicParsing="false" onAction="#pressOpenList"
+                                          text="Открыть список..."/>
+                                <MenuItem fx:id="saveListMenuItem" mnemonicParsing="false" onAction="#pressSaveList"
+                                          text="Сохранить список..."/>
                                 <SeparatorMenuItem mnemonicParsing="false" />
                                 <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#pressClose" text="Выход" />
                             </items>
@@ -54,16 +51,18 @@
                                         <Tooltip text="Удалить элемент с заданным индексом" />
                                     </tooltip>
                                 </Button>
-                                <Button fx:id="sortMenuItem" mnemonicParsing="false" onAction="#pressSort" text="Отсортировать">
+                                <Button fx:id="sortMenuItem" mnemonicParsing="false" onAction="#pressSort"
+                                        text="Отсортировать">
                                     <tooltip>
-                                        <Tooltip text="Применить к списку сортировку вставками" />
+                                        <Tooltip text="Применить к списку сортировку вставками"/>
                                     </tooltip>
                                 </Button>
                             </items>
                         </ToolBar>
                     </top>
                     <center>
-                        <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                        <TextArea fx:id="textArea" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true"
+                                  BorderPane.alignment="CENTER"/>
                     </center>
                 </BorderPane>
             </center>

@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -27,13 +28,9 @@ public class MainWindow {
     public Button removeMenuItem = new Button();
     public Button sortMenuItem = new Button();
 
-    public ListView<Integer> listView = new ListView<>();
+    public TextArea textArea = new TextArea();
 
     public MainWindow() {
-        setListView(listView);
-        System.out.println("MAIN:");
-        System.out.println(listView);
-        System.out.println(getList());
         refreshListView();
     }
 
@@ -47,7 +44,7 @@ public class MainWindow {
     }
 
     public void pressClose() {
-        ((Stage) listView.getScene().getWindow()).close();
+        ((Stage) textArea.getScene().getWindow()).close();
     }
 
     public void pressAbout() {
@@ -79,5 +76,19 @@ public class MainWindow {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.centerOnScreen();
         stage.showAndWait();
+    }
+
+    /**
+     * Обновить отображение списка в окне
+     */
+    private void refreshListView() {
+        StringBuilder result = new StringBuilder();
+        int index = 0;
+        for (int i : getList()) {
+            result.append(String.format("[\t%d] %d\n", index, i));
+            index++;
+        }
+        textArea.clear();
+        textArea.setText(result.toString());
     }
 }

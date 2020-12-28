@@ -16,19 +16,10 @@ public class AddDialog {
 
     public void pressOk() {
         try {
-            System.out.println("AddDialog before:");
-            System.out.println(getListView());
-            System.out.println(getList());
-
             int data = Integer.parseInt(dataTextField.getText());
             int index = Integer.parseInt(indexTextField.getText());
 
             getList().add(data, index);
-            refreshListView();
-
-            System.out.println("AddDialog after:");
-            System.out.println(getListView());
-            System.out.println(getList());
 
             close();
         } catch (NumberFormatException nfe) {
