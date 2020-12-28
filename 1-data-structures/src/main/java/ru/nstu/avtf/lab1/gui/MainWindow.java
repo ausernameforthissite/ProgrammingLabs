@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 import static ru.nstu.avtf.lab1.gui.ListContainer.*;
 import static ru.nstu.avtf.lab1.gui.StageLoader.loadAddDialog;
+import static ru.nstu.avtf.lab1.gui.StageLoader.loadAddToEndDialog;
 
 public class MainWindow {
     public MenuItem newListMenuItem = new MenuItem();
@@ -56,6 +57,8 @@ public class MainWindow {
     }
 
     public void pressAddToEnd() {
+        showDialog(loadAddToEndDialog());
+        refreshListView();
     }
 
     public void pressAdd() {
