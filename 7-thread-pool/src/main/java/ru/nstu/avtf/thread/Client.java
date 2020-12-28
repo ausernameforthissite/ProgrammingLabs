@@ -26,22 +26,17 @@ public class Client {
         if (partSize == 0) {
             partSize = 1;
         }
-        System.out.println("Матрица:");
-        System.out.println(matrix);
-        System.out.println("Размер порции: " + partSize);
 
         ArrayList<SquaringTask> tasks = new ArrayList<>();
         int firstRow = 0;
         int actualRunnables = 0;
         while (firstRow < rows) {
             int lastRow = Integer.min(firstRow + partSize - 1, rows - 1);
-            System.out.println("\tот " + firstRow + " до " + lastRow);
             SquaringTask task = new SquaringTask(matrix, firstRow, lastRow, columns);
             firstRow += partSize;
             tasks.add(task);
             actualRunnables++;
         }
-        System.out.println("Всего раннаблов: " + actualRunnables);
 
         // посчитаем законченные задания, чтобы завершить работу пула
         latch = new CountDownLatch(actualRunnables);
@@ -54,10 +49,6 @@ public class Client {
         pool.shutdown();
 
         long endTime = System.currentTimeMillis();
-
-        System.out.println("Матрица:");
-        System.out.println(matrix);
-
         return endTime - startTime;
     }
 
@@ -70,22 +61,17 @@ public class Client {
         if (partSize == 0) {
             partSize = 1;
         }
-        System.out.println("Матрица:");
-        System.out.println(matrix);
-        System.out.println("Размер порции: " + partSize);
 
         ArrayList<SquaringTask> tasks = new ArrayList<>();
         int firstRow = 0;
         int actualThreads = 0;
         while (firstRow < rows) {
             int lastRow = Integer.min(firstRow + partSize - 1, rows - 1);
-            System.out.println("\tот " + firstRow + " до " + lastRow);
             SquaringTask task = new SquaringTask(matrix, firstRow, lastRow, columns);
             firstRow += partSize;
             tasks.add(task);
             actualThreads++;
         }
-        System.out.println("Всего раннаблов: " + actualThreads);
 
         // посчитаем законченные задания, чтобы завершить работу пула
         latch = new CountDownLatch(actualThreads);
@@ -95,10 +81,6 @@ public class Client {
         // ждём завершения всех заданий, чтобы выключить пул
         latch.await();
         long endTime = System.currentTimeMillis();
-
-        System.out.println("Матрица:");
-        System.out.println(matrix);
-
         return endTime - startTime;
     }
 
@@ -111,10 +93,6 @@ public class Client {
         new Thread(task).start();
         latch.await();
         long endTime = System.currentTimeMillis();
-
-        System.out.println("Матрица:");
-        System.out.println(matrix);
-
         return endTime - startTime;
     }
 
@@ -149,7 +127,6 @@ public class Client {
             }
             if (latch != null) {
                 latch.countDown();
-                System.out.println("\tlatch: " + latch.getCount());
             }
         }
     }
