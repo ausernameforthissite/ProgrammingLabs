@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.Scene?>
-<Scene xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
+<Scene xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2"
        fx:controller="ru.nstu.avtf.lab1.gui.MainWindow">
     <root>
         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="220.0" minWidth="220.0" prefHeight="480.0"
@@ -19,13 +19,15 @@
                                           text="Открыть список..."/>
                                 <MenuItem fx:id="saveListMenuItem" mnemonicParsing="false" onAction="#pressSaveList"
                                           text="Сохранить список..."/>
-                                <SeparatorMenuItem mnemonicParsing="false" />
-                                <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#pressClose" text="Выход" />
+                                <SeparatorMenuItem mnemonicParsing="false"/>
+                                <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#pressClose"
+                                          text="Выход"/>
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Справка">
                             <items>
-                                <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#pressAbout" text="О программе..." />
+                                <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#pressAbout"
+                                          text="О программе..."/>
                             </items>
                         </Menu>
                     </menus>
@@ -36,19 +38,22 @@
                     <top>
                         <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                             <items>
-                                <Button fx:id="addToEndButton" mnemonicParsing="false" onAction="#pressAddToEnd" text="Вставить в конец">
+                                <Button fx:id="addToEndButton" mnemonicParsing="false" onAction="#pressAddToEnd"
+                                        text="Вставить в конец">
                                     <tooltip>
-                                        <Tooltip text="Вставить новый элемент в конец списка" />
+                                        <Tooltip text="Вставить новый элемент в конец списка"/>
                                     </tooltip>
                                 </Button>
-                                <Button fx:id="addMenuItem" mnemonicParsing="false" onAction="#pressAdd" text="Вставить по индексу">
+                                <Button fx:id="addMenuItem" mnemonicParsing="false" onAction="#pressAdd"
+                                        text="Вставить по индексу">
                                     <tooltip>
-                                        <Tooltip text="Вставить новый элемент на заданную позицию" />
+                                        <Tooltip text="Вставить новый элемент на заданную позицию"/>
                                     </tooltip>
                                 </Button>
-                                <Button fx:id="removeMenuItem" mnemonicParsing="false" onAction="#pressRemove" text="Удалить по индексу">
+                                <Button fx:id="removeMenuItem" mnemonicParsing="false" onAction="#pressRemove"
+                                        text="Удалить по индексу">
                                     <tooltip>
-                                        <Tooltip text="Удалить элемент с заданным индексом" />
+                                        <Tooltip text="Удалить элемент с заданным индексом"/>
                                     </tooltip>
                                 </Button>
                                 <Button fx:id="sortMenuItem" mnemonicParsing="false" onAction="#pressSort"
@@ -61,8 +66,8 @@
                         </ToolBar>
                     </top>
                     <center>
-                        <TextArea fx:id="textArea" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true"
-                                  BorderPane.alignment="CENTER"/>
+                        <TextArea fx:id="textArea" editable="false" prefHeight="200.0" prefWidth="200.0"
+                                  style="-fx-font-family: monospace;" wrapText="true" BorderPane.alignment="CENTER"/>
                     </center>
                 </BorderPane>
             </center>
