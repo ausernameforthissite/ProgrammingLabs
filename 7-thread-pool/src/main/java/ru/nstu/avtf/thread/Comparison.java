@@ -3,8 +3,8 @@ package ru.nstu.avtf.thread;
 import static ru.nstu.avtf.thread.Client.*;
 
 public class Comparison {
-    private static final int[] SIZES = {100, 170, 280};
-    private static final int[] RUNNABLES = {5, 6, 7};
+    private static final int[] SIZES = {500, 1000, 1500, 2000, 2500, 3000};
+    private static final int[] RUNNABLES = {36, 24, 12, 6};
     private static final int THREADS = 5;
 
     public static void main(String[] args) throws InterruptedException {

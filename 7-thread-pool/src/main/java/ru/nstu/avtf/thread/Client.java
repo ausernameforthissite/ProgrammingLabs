@@ -96,12 +96,12 @@ public class Client {
         return endTime - startTime;
     }
 
-    private static class SquaringTask implements Runnable {
+    public static class SquaringTask implements Runnable {
 
-        private CopyOnWriteArrayList<CopyOnWriteArrayList<Integer>> matrix;
-        private int firstRow;
-        private int lastRow;
-        private int columns;
+        private final CopyOnWriteArrayList<CopyOnWriteArrayList<Integer>> matrix;
+        private final int firstRow;
+        private final int lastRow;
+        private final int columns;
 
         public SquaringTask(CopyOnWriteArrayList<CopyOnWriteArrayList<Integer>> matrix, int firstRow, int lastRow,
                             int columns) {

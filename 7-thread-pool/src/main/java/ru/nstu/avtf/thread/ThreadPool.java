@@ -3,16 +3,13 @@ package ru.nstu.avtf.thread;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class ThreadPool {
-    private final int nThreads;
-    private final PoolWorker[] threads;
     private final LinkedBlockingQueue<Runnable> queue;
 
     private boolean shutdown;
 
     public ThreadPool(int nThreads) {
-        this.nThreads = nThreads;
         queue = new LinkedBlockingQueue<>();
-        threads = new PoolWorker[nThreads];
+        PoolWorker[] threads = new PoolWorker[nThreads];
 
         shutdown = false;
 
