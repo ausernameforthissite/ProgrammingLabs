@@ -8,47 +8,65 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 
-<Scene xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nstu.avtf.lab1.gui.MainWindow">
+<Scene xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nstu.avtf.lab1.gui.MainWindow">
     <root>
         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="220.0" minWidth="220.0" prefHeight="480.0" prefWidth="800.0">
-         <top>
-            <MenuBar BorderPane.alignment="CENTER">
-              <menus>
-                <Menu mnemonicParsing="false" text="Файл">
-                  <items>
-                        <MenuItem mnemonicParsing="false" text="Новый список" />
-                        <MenuItem mnemonicParsing="false" text="Открыть список..." />
-                        <MenuItem mnemonicParsing="false" text="Сохранить список..." />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                    <MenuItem mnemonicParsing="false" text="Выход" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Справка">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="О программе..." />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
-         </top>
-         <center>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <top>
-                  <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                    <items>
-                      <Button mnemonicParsing="false" text="Вставить в конец" />
-                        <Button mnemonicParsing="false" text="Вставить по индексу" />
-                        <Button mnemonicParsing="false" text="Удалить по индексу" />
-                        <Button mnemonicParsing="false" text="Отсортировать" />
-                    </items>
-                  </ToolBar>
-               </top>
-               <center>
-                  <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-               </center>
-            </BorderPane>
-         </center></BorderPane>
+            <top>
+                <MenuBar BorderPane.alignment="CENTER">
+                    <menus>
+                        <Menu mnemonicParsing="false" text="Файл">
+                            <items>
+                                <MenuItem fx:id="newListMenuItem" mnemonicParsing="false" onAction="#pressNewList" text="Новый список" />
+                                <MenuItem fx:id="openListMenuItem" mnemonicParsing="false" onAction="#pressOpenList" text="Открыть список..." />
+                                <MenuItem fx:id="saveListMenuItem" mnemonicParsing="false" onAction="#pressSaveList" text="Сохранить список..." />
+                                <SeparatorMenuItem mnemonicParsing="false" />
+                                <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#pressClose" text="Выход" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Справка">
+                            <items>
+                                <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#pressAbout" text="О программе..." />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+            </top>
+            <center>
+                <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <top>
+                        <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                            <items>
+                                <Button fx:id="addToEndButton" mnemonicParsing="false" onAction="#pressAddToEnd" text="Вставить в конец">
+                                    <tooltip>
+                                        <Tooltip text="Вставить новый элемент в конец списка" />
+                                    </tooltip>
+                                </Button>
+                                <Button fx:id="addMenuItem" mnemonicParsing="false" onAction="#pressAdd" text="Вставить по индексу">
+                                    <tooltip>
+                                        <Tooltip text="Вставить новый элемент на заданную позицию" />
+                                    </tooltip>
+                                </Button>
+                                <Button fx:id="removeMenuItem" mnemonicParsing="false" onAction="#pressRemove" text="Удалить по индексу">
+                                    <tooltip>
+                                        <Tooltip text="Удалить элемент с заданным индексом" />
+                                    </tooltip>
+                                </Button>
+                                <Button fx:id="sortMenuItem" mnemonicParsing="false" onAction="#pressSort" text="Отсортировать">
+                                    <tooltip>
+                                        <Tooltip text="Применить к списку сортировку вставками" />
+                                    </tooltip>
+                                </Button>
+                            </items>
+                        </ToolBar>
+                    </top>
+                    <center>
+                        <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                    </center>
+                </BorderPane>
+            </center>
+        </BorderPane>
     </root>
 </Scene>
