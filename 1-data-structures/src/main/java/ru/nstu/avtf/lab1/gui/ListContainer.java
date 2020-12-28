@@ -2,10 +2,10 @@ package ru.nstu.avtf.lab1.gui;
 
 import ru.nstu.avtf.lab1.list.MyLinkedList;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 /**
@@ -26,9 +26,18 @@ public class ListContainer {
     }
 
     public static void readFromFile(File file) throws IOException {
-        try (Stream<String> stream = Files.lines(Paths.get(file.getPath()))) {
+        try (Stream<String> stream = Files.lines(file.toPath())) {
             resetList();
             stream.forEach(s -> list.add(Integer.parseInt(s)));
+        }
+    }
+
+    public static void saveToFile(File file) throws IOException {
+        try (BufferedWriter writer = Files.newBufferedWriter(file.toPath())) {
+            for (Integer integer : list) {
+                writer.write(integer.toString());
+                writer.newLine();
+            }
         }
     }
 

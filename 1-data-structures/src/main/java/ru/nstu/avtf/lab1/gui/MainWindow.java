@@ -47,6 +47,7 @@ public class MainWindow {
     }
 
     public void pressSaveList() {
+        saveList();
     }
 
     public void pressClose() {
@@ -117,6 +118,24 @@ public class MainWindow {
                     "Ошибка",
                     "Не удалось прочитать файл",
                     "Неправильный формат файла",
+                    e).showAndWait();
+        }
+    }
+
+    private void saveList() {
+        CHOOSER.setTitle("Сохранить список...");
+        File file = CHOOSER.showSaveDialog(textArea.getScene().getWindow());
+        if (file == null) {
+            return;
+        }
+        try {
+            saveToFile(file);
+            CHOOSER.setInitialDirectory(file.getParentFile());
+        } catch (IOException e) {
+            new ExceptionAlert(
+                    "Ошибка",
+                    "Не удалось сохранить файл",
+                    "Произошла ошибка при записи на диск",
                     e).showAndWait();
         }
     }
