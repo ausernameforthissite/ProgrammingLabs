@@ -74,8 +74,17 @@ public class MyLinkedList<T extends Comparable<T>> implements Iterable<T> {
         // новый элемент
         Node<T> tmp = new Node<>(data);
 
+        // для нулевого элемента надо обновить начало списка
+        if (index == 0) {
+            tmp.setNext(head);
+            head = tmp;
+            size++;
+            return;
+        }
+
         // пробежимся по списку, считая индексы элементов
-        Node<T> current = head;
+        Node<T> current = new Node<>();
+        current.setNext(head);
         for (int i = 0; i < index && current.getNext() != null; i++) {
             current = current.getNext();
         }
@@ -199,7 +208,7 @@ public class MyLinkedList<T extends Comparable<T>> implements Iterable<T> {
      */
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<>() {
+        return new Iterator<T>() {
             Node<T> current = head;
 
             @Override
