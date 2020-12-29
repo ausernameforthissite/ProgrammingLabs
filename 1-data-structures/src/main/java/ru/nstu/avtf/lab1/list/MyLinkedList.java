@@ -1,4 +1,4 @@
-package ru.nstu.avtf.lab1;
+package ru.nstu.avtf.lab1.list;
 
 import java.util.Iterator;
 import java.util.Objects;
